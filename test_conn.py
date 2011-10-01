@@ -1,12 +1,17 @@
 import httplib
 import urllib
+from string import *
 
 if __name__ == '__main__':
   username = "0123456789"
-  conn = httplib.HTTPConnection('127.0.0.1:8080')
-  conn.request("GET", "/doLogin?userid="+username)
+  conn = httplib.HTTPConnection('127.0.0.1:3000')
+  conn.request("GET", "/UCRequest?userid="+username)
   r1 = conn.getresponse()
-  print r1.status, r1.reason
-  data1 = r1.read()
-  print data1
+  if r1.status == 404:
+    print "404"
+  else:
+    print r1.status, r1.reason
+    data1 = r1.read()
+    print data1
+
   conn.close()
